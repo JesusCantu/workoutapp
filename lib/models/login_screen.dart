@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:workoutapp/models/sign_in_screen.dart';
+import 'package:workoutapp/models/sign_up_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -32,8 +34,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 onPressed: () {
-                //  Navigator.push(context,
-                //  MaterialPageRoute(builder: (context) => SignInScreen()));
+                  //Navigator.push(context,
+                  //MaterialPageRoute(builder: (context) => SignInScreen()));
                 },
               ),
               SizedBox(height: 20),
@@ -50,8 +52,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 onPressed: () {
-                 // Navigator.push(context,
-                 // MaterialPageRoute(builder: (context) => SignUpScreen()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SignUp()));
                 },
               ),
             ])));
