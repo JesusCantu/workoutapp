@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:workoutapp/models/login_screen.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:workoutapp/services/auth.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -8,17 +7,19 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  TextEditingController fn = TextEditingController(); // first name
-  TextEditingController ln = TextEditingController(); // last name
-  TextEditingController u = TextEditingController(); // username
-  TextEditingController p = TextEditingController(); // password
+
+  final AuthService _auth = AuthService();
 
   String _firstName;
   String _lastName;
-  String _username;
-  String _password;
+  String email = '';
+  String password = '';
+  String error = '';
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
+  
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color.fromRGBO(84, 110, 122, 1),
@@ -31,13 +32,14 @@ class _SignUpState extends State<SignUp> {
         body: Center(
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                key: _formKey,
                 children: <Widget>[
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                 child: TextFormField(
                   initialValue: _firstName,
                   style: TextStyle(color: Colors.white),
-                  controller: fn,
+                  
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     fillColor: Color.fromRGBO(41, 67, 78, 1),
@@ -63,7 +65,7 @@ class _SignUpState extends State<SignUp> {
                 child: TextFormField(
                   initialValue: _lastName,
                   style: TextStyle(color: Colors.white),
-                  controller: ln,
+                  
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     fillColor: Color.fromRGBO(41, 67, 78, 1),
@@ -87,35 +89,35 @@ class _SignUpState extends State<SignUp> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                 child: TextFormField(
-                  initialValue: _username,
+                  initialValue: email,
                   style: TextStyle(color: Colors.white),
-                  controller: u,
+                  
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     fillColor: Color.fromRGBO(41, 67, 78, 1),
                     filled: true,
-                    hintText: "Username",
+                    hintText: "Email",
                     hintStyle: TextStyle(
                         color: Color.fromRGBO(84, 110, 122, 1), fontSize: 20),
                   ),
                   validator: (String value) {
                     if (value.isEmpty) {
-                      return "Username is required";
+                      return "Email is required";
                     }
 
                     return null;
                   },
                   onSaved: (String value) {
-                    _username = value;
+                    email = value;
                   },
                 ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                 child: TextFormField(
-                  initialValue: _password,
+                  initialValue: password,
                   style: TextStyle(color: Colors.white),
-                  controller: p,
+                  
                   obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -133,11 +135,12 @@ class _SignUpState extends State<SignUp> {
                     return null;
                   },
                   onSaved: (String value) {
-                    _password = value;
+                    password = value;
                   },
                 ),
               ),
               RaisedButton(
+                
                 key: Key("sign-up-button-2"),
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(10.0)),
@@ -149,7 +152,26 @@ class _SignUpState extends State<SignUp> {
                     style: TextStyle(color: Colors.white, fontSize: 14),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () async{
+                  if (_formKey.currentState.validate()){
+                    dynamic result = await _auth.SignUp(email, password);
+                    if(result == null){
+                      setState(() => error = 'please supply a valid email');
+                    }
+                  }
+
+                  _formKey.currentState.save();
+
+               
+                  
+                  
+                 
+                },
+              ),
+              SizedBox(height: 12.0),
+              Text(
+                error,
+                style: TextStyle(color: Colors.red, fontSize: 15.0),
               ),
             ])));
   }

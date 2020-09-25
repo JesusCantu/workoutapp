@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:workoutapp/models/login_screen.dart';
+import 'package:workoutapp/screens/login_screen.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreenLogin extends StatefulWidget {
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  _SplashScreenLoginState createState() => _SplashScreenLoginState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenLoginState extends State<SplashScreenLogin> {
   @override
   void initState() {
     super.initState();
@@ -33,6 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
       child: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        
         children: <Widget>[
           Text(
             "WORKOUT APP",
