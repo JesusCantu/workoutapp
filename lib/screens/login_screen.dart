@@ -13,6 +13,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
         backgroundColor: Color.fromRGBO(84, 110, 122, 1),
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text(""),
           backgroundColor: Colors.transparent,
           elevation: 0,

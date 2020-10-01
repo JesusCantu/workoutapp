@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:workoutapp/screens/login_screen.dart';
+import 'package:workoutapp/screens/homescreen.dart';
 
 class SplashScreenHome extends StatefulWidget {
   @override
@@ -22,7 +22,7 @@ class _SplashScreenHomeState extends State<SplashScreenHome> {
 
   navigateToLoginScreen() {
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => LoginScreen()));
+        context, MaterialPageRoute(builder: (context) => Home()));
   }
 
   @override

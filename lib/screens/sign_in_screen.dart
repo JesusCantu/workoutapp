@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workoutapp/screens/homescreen.dart';
 import 'package:workoutapp/services/auth.dart';
 
 class SignIn extends StatefulWidget {
@@ -98,6 +99,9 @@ class _SignInState extends State<SignIn> {
                     dynamic result = await _auth.signIn(email, password);
                     if(result == null){
                       setState(() => error = 'Could not sign in');
+                    }else{
+                      Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Home()));
                     }
                   }
                 },

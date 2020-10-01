@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workoutapp/screens/homescreen.dart';
 import 'package:workoutapp/services/auth.dart';
 
 class SignUp extends StatefulWidget {
@@ -155,6 +156,9 @@ class _SignUpState extends State<SignUp> {
                     dynamic result = await _auth.signUp(email, password);
                     if(result == null){
                       setState(() => error = 'Please use a valid email');
+                    }else{
+                      Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Home()));
                     }
                   }
 
