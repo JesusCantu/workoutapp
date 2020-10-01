@@ -10,11 +10,11 @@ class _SignInState extends State<SignIn> {
   
 
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
 
-  String username = '';
+  String email = '';
   String password = '';
-
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -26,36 +26,33 @@ class _SignInState extends State<SignIn> {
           backgroundColor: Color.fromRGBO(30, 50, 56, 1),
           elevation: 0,
         ),
-        body: Center(
-            child: Column(
+        body: Container(
+            child: Form(
+              key: _formKey,
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                 child: TextFormField(
-                  initialValue: username,
+                  initialValue: email,
                   style: TextStyle(color: Colors.white),
                   
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     fillColor: Color.fromRGBO(41, 67, 78, 1),
                     filled: true,
-                    hintText: "Username",
+                    hintText: "Email",
                     hintStyle: TextStyle(
                         color: Color.fromRGBO(84, 110, 122, 1), fontSize: 20),
                   ),
+                  validator: (val) => val.isEmpty ? 'Enter an email' : null,
                   onChanged: (val) {
-                    setState(() => username = val);
+                    setState(() => email = val);
                   },
-                  validator: (String value) {
-                    if (value.isEmpty) {
-                      return "Username is required";
-                    }
-
-                    return null;
-                  },
+                  
                   onSaved: (String value) {
-                    username = value;
+                    email = value;
                   },
                 ),
               ),
@@ -74,16 +71,11 @@ class _SignInState extends State<SignIn> {
                     hintStyle: TextStyle(
                         color: Color.fromRGBO(84, 110, 122, 1), fontSize: 20),
                   ),
+                  validator: (val) => val.isEmpty ? 'Enter a password' : null,
                   onChanged: (val) {
                     setState(() => password = val);
                   },
-                  validator: (String value) {
-                    if (value.isEmpty) {
-                      return "Password is required";
-                    }
-
-                    return null;
-                  },
+                  
                   onSaved: (String value) {
                     password = value;
                   },
@@ -102,10 +94,20 @@ class _SignInState extends State<SignIn> {
                   ),
                 ),
                 onPressed: () async {
-                  print(username);
-                  print(password);
+                  if (_formKey.currentState.validate()){
+                    dynamic result = await _auth.signIn(email, password);
+                    if(result == null){
+                      setState(() => error = 'Could not sign in');
+                    }
+                  }
                 },
               ),
-            ])));
+              SizedBox(height: 12.0),
+              Text(
+                error,
+                style: TextStyle(color: Colors.red, fontSize: 15.0),
+              ),
+            ])
+            )));
   }
 }

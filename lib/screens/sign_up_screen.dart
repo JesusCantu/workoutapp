@@ -10,8 +10,8 @@ class _SignUpState extends State<SignUp> {
 
   final AuthService _auth = AuthService();
 
-  String _firstName;
-  String _lastName;
+  String firstName;
+  String lastName;
   String email = '';
   String password = '';
   String error = '';
@@ -29,15 +29,17 @@ class _SignUpState extends State<SignUp> {
           backgroundColor: Color.fromRGBO(30, 50, 56, 1),
           elevation: 0,
         ),
-        body: Center(
-            child: Column(
+        body: Container(
+            child: Form(
+              key: _formKey,
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                key: _formKey,
+                
                 children: <Widget>[
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                 child: TextFormField(
-                  initialValue: _firstName,
+                  initialValue: firstName,
                   style: TextStyle(color: Colors.white),
                   
                   decoration: InputDecoration(
@@ -56,14 +58,14 @@ class _SignUpState extends State<SignUp> {
                     return null;
                   },
                   onSaved: (String value) {
-                    _firstName = value;
+                    firstName = value;
                   },
                 ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                 child: TextFormField(
-                  initialValue: _lastName,
+                  initialValue: lastName,
                   style: TextStyle(color: Colors.white),
                   
                   decoration: InputDecoration(
@@ -82,7 +84,7 @@ class _SignUpState extends State<SignUp> {
                     return null;
                   },
                   onSaved: (String value) {
-                    _lastName = value;
+                    lastName = value;
                   },
                 ),
               ),
@@ -100,16 +102,11 @@ class _SignUpState extends State<SignUp> {
                     hintStyle: TextStyle(
                         color: Color.fromRGBO(84, 110, 122, 1), fontSize: 20),
                   ),
-                  validator: (String value) {
-                    if (value.isEmpty) {
-                      return "Email is required";
-                    }
-
-                    return null;
+                  validator: (val) => val.isEmpty ? 'Enter an email' : null,
+                  onChanged: (val){
+                    setState(() => email = val);
                   },
-                  onSaved: (String value) {
-                    email = value;
-                  },
+                  
                 ),
               ),
               Padding(
@@ -134,9 +131,10 @@ class _SignUpState extends State<SignUp> {
 
                     return null;
                   },
-                  onSaved: (String value) {
-                    password = value;
+                  onChanged: (val){
+                    setState(() => password = val);
                   },
+                  
                 ),
               ),
               RaisedButton(
@@ -154,9 +152,9 @@ class _SignUpState extends State<SignUp> {
                 ),
                 onPressed: () async{
                   if (_formKey.currentState.validate()){
-                    dynamic result = await _auth.SignUp(email, password);
+                    dynamic result = await _auth.signUp(email, password);
                     if(result == null){
-                      setState(() => error = 'please supply a valid email');
+                      setState(() => error = 'Please use a valid email');
                     }
                   }
 
@@ -173,6 +171,8 @@ class _SignUpState extends State<SignUp> {
                 error,
                 style: TextStyle(color: Colors.red, fontSize: 15.0),
               ),
-            ])));
+            ])
+            ),
+            ));
   }
 }
