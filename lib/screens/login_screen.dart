@@ -22,41 +22,51 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-              RaisedButton(
-                key: Key("sign-in-button"),
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(10.0)),
-                color: Color.fromRGBO(30, 50, 56, 1),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(60, 20, 60, 20),
-                  child: Text(
-                    "Sign In",
-                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  // Account Icon
+                  Container(
+                    padding: EdgeInsets.only(bottom: 50),
+                    child: Icon(
+                      Icons.account_circle,
+                      color: Color.fromRGBO(255, 255, 255, 1),
+                      size: 200
+                    )
                   ),
-                ),
-                onPressed: () {
-                  Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SignIn()));
-                },
-              ),
-              SizedBox(height: 20),
-              RaisedButton(
-                key: Key("sign-up-button"),
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(10.0)),
-                color: Color.fromRGBO(129, 156, 169, 1),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(60, 20, 60, 20),
-                  child: Text(
-                    "Sign Up",
-                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  RaisedButton(
+                    key: Key("sign-in-button"),
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(10.0)),
+                    color: Color.fromRGBO(30, 50, 56, 1),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(60, 20, 60, 20),
+                      child: Text(
+                        "Sign In",
+                        style: TextStyle(color: Colors.white, fontSize: 14),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SignIn()));
+                    },
                   ),
-                ),
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignUp()));
-                },
-              ),
-            ])));
+                  SizedBox(height: 20),
+                  RaisedButton(
+                    key: Key("sign-up-button"),
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(10.0)),
+                    color: Color.fromRGBO(129, 156, 169, 1),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(60, 20, 60, 20),
+                      child: Text(
+                        "Sign Up",
+                        style: TextStyle(color: Colors.white, fontSize: 14),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => SignUp()));
+                    },
+                  ),
+                ]
+            )));
   }
 }
