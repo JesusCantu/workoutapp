@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workoutapp/models/login_screen.dart';
+import 'package:workoutapp/models/sign_in_screen.dart';
 import 'package:sqflite/sqflite.dart';
 
 class SignUp extends StatefulWidget {
@@ -20,6 +21,11 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
+    bool firstNameEntered = false;
+    bool lastNameEntered = false;
+    bool usernameEntered = false;
+    bool passwordEntered = false;
+
     return Scaffold(
         backgroundColor: Color.fromRGBO(84, 110, 122, 1),
         appBar: AppBar(
@@ -35,6 +41,7 @@ class _SignUpState extends State<SignUp> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                 child: TextFormField(
+                  key: Key("firstname-text"),
                   initialValue: _firstName,
                   style: TextStyle(color: Colors.white),
                   controller: fn,
@@ -61,6 +68,7 @@ class _SignUpState extends State<SignUp> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                 child: TextFormField(
+                  key: Key("lastname-text"),
                   initialValue: _lastName,
                   style: TextStyle(color: Colors.white),
                   controller: ln,
@@ -87,6 +95,7 @@ class _SignUpState extends State<SignUp> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                 child: TextFormField(
+                  key: Key("username-text"),
                   initialValue: _username,
                   style: TextStyle(color: Colors.white),
                   controller: u,
@@ -113,6 +122,7 @@ class _SignUpState extends State<SignUp> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                 child: TextFormField(
+                  key: Key("password-text"),
                   initialValue: _password,
                   style: TextStyle(color: Colors.white),
                   controller: p,
@@ -149,7 +159,10 @@ class _SignUpState extends State<SignUp> {
                     style: TextStyle(color: Colors.white, fontSize: 14),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SignIn()));
+                },
               ),
             ])));
   }

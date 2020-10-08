@@ -34,8 +34,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 onPressed: () {
-                  //Navigator.push(context,
-                  //MaterialPageRoute(builder: (context) => SignInScreen()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SignIn()));
                 },
               ),
               SizedBox(height: 20),
