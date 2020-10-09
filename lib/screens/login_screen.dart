@@ -22,6 +22,10 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+              Container(
+                  padding: EdgeInsets.only(bottom: 50),
+                  child: Icon(Icons.account_circle,
+                      color: Color.fromRGBO(255, 255, 255, 1), size: 200)),
               RaisedButton(
                 key: Key("sign-in-button"),
                 shape: new RoundedRectangleBorder(
@@ -36,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 onPressed: () {
                   Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SignIn()));
+                      MaterialPageRoute(builder: (context) => SignIn()));
                 },
               ),
               SizedBox(height: 20),

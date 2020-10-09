@@ -1,42 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:workoutapp/models/Workout.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:workoutapp/screens/create_plan_screen.dart';
 import 'package:workoutapp/screens/login_screen.dart';
 import 'package:workoutapp/services/auth.dart';
-import 'package:workoutapp/services/database.dart';
-import 'package:provider/provider.dart';
-import 'package:workoutapp/screens/your_plans_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:workoutapp/screens/stats_screen.dart';
 
-class Home extends StatelessWidget {
+class AddPlan extends StatefulWidget{
+  @override 
+  _AddPlanState createState() => _AddPlanState();
+}
+
+class _AddPlanState extends State<AddPlan>{
   final AuthService _auth = AuthService();
-
-  @override
-  Widget build(BuildContext context) {
-    return  Scaffold(
-        backgroundColor: Color.fromRGBO(84, 110, 122, 1),
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text('Home'),
-          backgroundColor: Color.fromRGBO(30, 50, 56, 1),
-          actions: <Widget>[
-            FlatButton.icon(
-              icon: Icon(
-                Icons.person,
-                color: Colors.white,
-              ),
-              label: Text(
-                'logout',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () async {
-                await _auth.signOut();
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => LoginScreen()));
-              },
-            )
-          ],
-        ),
+  @override 
+  Widget build(BuildContext context){
+    return Scaffold(
+          backgroundColor: Color.fromRGBO(84, 110, 122, 1),
+          appBar: AppBar(
+            title: Text('Add a Plan'),
+            backgroundColor: Color.fromRGBO(30, 50, 56, 1),
+            actions: <Widget>[
+              FlatButton.icon(
+                icon: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                ),
+                label: Text(
+                  'logout',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () async {
+                  await _auth.signOut();
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoginScreen()));
+                },
+              )
+            ],
+          ),
         body: Center(
         child: Column(
           children: [
@@ -48,7 +47,7 @@ class Home extends StatelessWidget {
               child: RaisedButton(
                 // Button Content Padding
                 padding: EdgeInsets.all(20),
-                key: Key("info-button"),
+                key: Key("pre-set-plans-button"),
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(10.0)),
                 color: Color.fromRGBO(30, 50, 56, 1),
@@ -58,14 +57,14 @@ class Home extends StatelessWidget {
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                       alignment: Alignment.topLeft,
                       child: Text(
-                        "Body Info",
+                        "Pre-Set Plans",
                         style: TextStyle(color: Colors.white, fontSize: 28),
                       ),  
                     ),
                     Container(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        "Provide information to allow better plan recommendations and additional statistics.",
+                        "Choose from a list of pre-set plans.",
                         style: GoogleFonts.montserrat(color: Colors.white, fontSize: 14),
                       )
                     )
@@ -100,22 +99,20 @@ class Home extends StatelessWidget {
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                       alignment: Alignment.topLeft,
                       child: Text(
-                        "Your Plans",
+                        "Custom Plans",
                         style: TextStyle(color: Colors.white, fontSize: 28),
                       ),  
                     ),
                     Container(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        "Your current workout plans. Choose from preset templates or create your own custom plans to fit your needs.",
+                        "Choose from a list of custom plans.",
                         style: GoogleFonts.montserrat(color: Colors.white, fontSize: 14),
                       )
                     )
                   ]
                 ),
                 onPressed: () async{
-                      Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => YourPlans()));
                       
 
 
@@ -143,25 +140,23 @@ class Home extends StatelessWidget {
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                       alignment: Alignment.topLeft,
                       child: Text(
-                        "Statistics",
+                        "Create New Plan",
                         style: TextStyle(color: Colors.white, fontSize: 28),
                       ),  
                     ),
                     Container(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        "View your exercise data and progress.",
+                        "Create a new workout plan.",
                         style: GoogleFonts.montserrat(color: Colors.white, fontSize: 14),
                       )
                     )
                   ]
                 ),
                 onPressed: () async{
-                      Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => StatsScreen()));
-
-
-
+                     
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => CreatePlan()));
 
 
                 }
@@ -170,7 +165,7 @@ class Home extends StatelessWidget {
           ]
         )
       )
-      );
-    
+          
+          );
   }
 }

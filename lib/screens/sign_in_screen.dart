@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workoutapp/screens/homescreen.dart';
 import 'package:workoutapp/services/auth.dart';
+import 'package:workoutapp/util/loading.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class _SignInState extends State<SignIn> {
 
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   String email = '';
   String password = '';
@@ -19,7 +21,7 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
         backgroundColor: Color.fromRGBO(84, 110, 122, 1),
         appBar: AppBar(
           title: Text("Sign In to Your Account"),
@@ -96,9 +98,13 @@ class _SignInState extends State<SignIn> {
                 ),
                 onPressed: () async {
                   if (_formKey.currentState.validate()){
+                    setState(() => loading = true);
                     dynamic result = await _auth.signIn(email, password);
                     if(result == null){
-                      setState(() => error = 'Could not sign in');
+                      setState(() {
+                        error = 'Could not sign in';
+                        loading = false;
+                        });
                     }else{
                       Navigator.push(context,
                       MaterialPageRoute(builder: (context) => Home()));
