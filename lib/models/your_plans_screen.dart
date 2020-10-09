@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:workoutapp/models/add_plan_screen.dart';
+import 'package:workoutapp/models/view_stretch_plan_screen.dart';
+import 'package:workoutapp/models/view_aerobics_plan_screen.dart';
+import 'package:workoutapp/models/view_weightlifting_plan_screen.dart';
 
 class YourPlans extends StatefulWidget {
   @override
@@ -37,8 +40,10 @@ class _YourPlans extends State<YourPlans> {
                   ),
                   key: Key('stretches-button'),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AddPlan()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => YourStretchPlans()));
                   },
                 ),
               ),
@@ -59,7 +64,12 @@ class _YourPlans extends State<YourPlans> {
                     style: TextStyle(fontSize: 20),
                   ),
                   key: Key('aerobics-button'),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => YourAerobicsPlans()));
+                  },
                 ),
               ),
               SizedBox(
@@ -79,7 +89,35 @@ class _YourPlans extends State<YourPlans> {
                     style: TextStyle(fontSize: 20),
                   ),
                   key: Key('weightlifting-button'),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => YourWeightLiftingPlans()));
+                  },
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              ButtonTheme(
+                minWidth: 350.0,
+                height: 100,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: RaisedButton(
+                  color: Color.fromRGBO(30, 50, 56, 1),
+                  disabledTextColor: Colors.black,
+                  textColor: Colors.white,
+                  child: Text(
+                    "Add a Plan",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  key: Key('add-a-plan-button'),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => AddPlan()));
+                  },
                 ),
               ),
             ])));
