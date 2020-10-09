@@ -6,51 +6,105 @@ class StatsScreen extends StatefulWidget {
   _StatsScreenState createState() => _StatsScreenState();
 }
 
-// Charts Class
-class WeightChart {
-  final String day;
-  final int weight;
-  final charts.Color color;
+// Chart Classes
 
-  WeightChart(this.day, this.weight, Color color)
-      : this.color = charts.Color(
-            r: color.red, g: color.green, b: color.blue, a: color.alpha);
+/// [Chart Data Class]
+class TimeSeriesData {
+  final DateTime time;
+  final int data;
+
+  TimeSeriesData(this.time, this.data);
+}
+
+/// [Time Series Chart Class]
+class SimpleTimeSeriesChart {
+  final List<charts.Series> seriesList;
+  final bool animate;
+
+  SimpleTimeSeriesChart(this.seriesList, {this.animate});
+
+  /// [Sample Data Set for Testing]
+  /// Create one series with sample hard coded data.
+  static List<charts.Series<TimeSeriesData, DateTime>> _createSampleData() {
+    final data = [
+      new TimeSeriesData(new DateTime(2017, 9, 1), 93),
+      new TimeSeriesData(new DateTime(2017, 9, 2), 95),
+      new TimeSeriesData(new DateTime(2017, 9, 3), 97),
+      new TimeSeriesData(new DateTime(2017, 9, 4), 100),
+      new TimeSeriesData(new DateTime(2017, 9, 5), 101),
+      new TimeSeriesData(new DateTime(2017, 9, 6), 98),
+      new TimeSeriesData(new DateTime(2017, 9, 7), 99),
+      new TimeSeriesData(new DateTime(2017, 9, 8), 102),
+      new TimeSeriesData(new DateTime(2017, 9, 9), 99),
+      new TimeSeriesData(new DateTime(2017, 9, 10), 100),
+      new TimeSeriesData(new DateTime(2017, 9, 11), 104),
+      new TimeSeriesData(new DateTime(2017, 9, 12), 107),
+      new TimeSeriesData(new DateTime(2017, 9, 13), 105),
+      new TimeSeriesData(new DateTime(2017, 9, 14), 107),
+      new TimeSeriesData(new DateTime(2017, 9, 15), 109),
+    ];
+
+    return [
+      new charts.Series<TimeSeriesData, DateTime>(
+        id: 'data',
+        domainFn: (TimeSeriesData data, _) => data.time,
+        measureFn: (TimeSeriesData data, _) => data.data,
+        data: data,
+      )
+    ];
+  }
 }
 
 class _StatsScreenState extends State<StatsScreen> {
   @override
   Widget build(BuildContext context) {
-    var data = [
-      WeightChart('9/10', 190, Colors.white),
-      WeightChart('9/11', 192, Colors.white),
-      WeightChart('9/12', 188, Colors.white),
-      WeightChart('9/13', 188, Colors.white),
-      WeightChart('9/14', 186, Colors.white),
-      WeightChart('9/15', 185, Colors.white),
-      WeightChart('9/16', 188, Colors.white),
-      WeightChart('9/17', 191, Colors.white),
-      WeightChart('9/18', 190, Colors.white),
-    ];
+    // Set chart data
+    List<charts.Series> seriesList = SimpleTimeSeriesChart._createSampleData();
 
-    var series = [
-      charts.Series(
-        domainFn: (WeightChart weightData, _) => weightData.day,
-        measureFn: (WeightChart weightData, _) => weightData.weight,
-        colorFn: (WeightChart weightData, _) => weightData.color,
-        id: 'Weights',
-        data: data,
+    var chart = charts.TimeSeriesChart(
+      seriesList,
+      /// Reference: [https://github.com/google/charts/issues/117]
+       
+      /// [X-Axis Styling]
+      domainAxis: new charts.DateTimeAxisSpec(
+        renderSpec: charts.GridlineRendererSpec(
+                      // X-Axis Label Text Color
+                      labelStyle: new charts.TextStyleSpec(
+                        fontSize: 14,
+                        color: charts.MaterialPalette.white,
+                      ),
+                      // For Vertical Gridlines
+                      lineStyle: charts.LineStyleSpec(
+                        color: charts.MaterialPalette.gray.shadeDefault,
+                      )),
       ),
-    ];
 
-    var chart = charts.BarChart(
-      series,
-      animate: true,
+      /// [Y-Axis Styling]
+      primaryMeasureAxis: new charts.NumericAxisSpec(
+        renderSpec: charts.GridlineRendererSpec(
+                      // X-Axis Label Text Color
+                      labelStyle: new charts.TextStyleSpec(
+                        fontSize: 14,
+                        color: charts.MaterialPalette.white,
+                      ),
+                      // For Vertical Gridlines
+                      lineStyle: charts.LineStyleSpec(
+                        color: charts.MaterialPalette.gray.shadeDefault,
+                      )),
+      ),
+      animate: false,
+      // Optionally pass in a [DateTimeFactory] used by the chart. The factory
+      // should create the same type of [DateTime] as the data provided. If none
+      // specified, the default creates local date time.
+      dateTimeFactory: const charts.LocalDateTimeFactory(),
     );
 
+
     var chartWidget = Padding(
-      padding: EdgeInsets.all(0.0),
+      padding: EdgeInsets.all(1.0),
       child: SizedBox(
         height: 150.0,
+        width: 1000,
         child: chart,
       ),
     );
@@ -86,8 +140,15 @@ class _StatsScreenState extends State<StatsScreen> {
                       style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500, color: Color.fromRGBO(255, 255, 255, 1)),
                       ),
                     ),
-                    // Chart
-                    chartWidget
+                    /// [Horizontal Scrolling]
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: 
+                        // Chart
+                        /// [PLACEHOLDER] ///
+                        chartWidget,
+                      
+                    )
                   ]
                 ),
               ),
@@ -110,7 +171,15 @@ class _StatsScreenState extends State<StatsScreen> {
                       style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500, color: Color.fromRGBO(255, 255, 255, 1)),
                       ),
                     ),
-                    
+                    /// [Horizontal Scrolling]
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: 
+                        // Chart
+                        /// [PLACEHOLDER] ///
+                        chartWidget,
+                      
+                    )
                   ]
                 ),
               ),
@@ -133,7 +202,15 @@ class _StatsScreenState extends State<StatsScreen> {
                       style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500, color: Color.fromRGBO(255, 255, 255, 1)),
                       ),
                     ),
-                    
+                    /// [Horizontal Scrolling]
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: 
+                        // Chart
+                        /// [PLACEHOLDER] ///
+                        chartWidget,
+                      
+                    )
                   ]
                 ),
               ),
