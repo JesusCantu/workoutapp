@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workoutapp/models/preset_plans_screen.dart';
 import 'package:workoutapp/models/create_plan_screen.dart';
+import 'package:workoutapp/models/view_custom_plan_screen.dart';
 
 class AddPlan extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class _AddPlan extends State<AddPlan> {
     return Scaffold(
         backgroundColor: Color.fromRGBO(84, 110, 122, 1),
         appBar: AppBar(
-          title: Text("Add a Plan"),
+          title: Text("Add a Workout Plan"),
           key: Key("add-plan-text"),
           centerTitle: true,
           backgroundColor: Color.fromRGBO(30, 50, 56, 1),
@@ -33,7 +34,7 @@ class _AddPlan extends State<AddPlan> {
                   disabledTextColor: Colors.black,
                   textColor: Colors.white,
                   child: Text(
-                    "Pre-set Plans",
+                    "Pre-set Workouts",
                     style: TextStyle(fontSize: 20),
                   ),
                   key: Key('preset-plan-button'),
@@ -56,11 +57,16 @@ class _AddPlan extends State<AddPlan> {
                   disabledTextColor: Colors.black,
                   textColor: Colors.white,
                   child: Text(
-                    "Custom Plans",
+                    "Custom Workouts",
                     style: TextStyle(fontSize: 20),
                   ),
                   key: Key('custom-plan-button'),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => YourCustomPlans()));
+                  },
                 ),
               ),
               SizedBox(
@@ -76,7 +82,7 @@ class _AddPlan extends State<AddPlan> {
                   disabledTextColor: Colors.black,
                   textColor: Colors.white,
                   child: Text(
-                    "Create New Plan",
+                    "Create New Workout",
                     style: TextStyle(fontSize: 20),
                   ),
                   key: Key('create-plan-button'),

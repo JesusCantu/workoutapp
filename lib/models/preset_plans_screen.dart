@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:workoutapp/models/view_pre_stretch_plan_screen.dart';
+import 'package:workoutapp/models/view_pre_aerobics_plan_screen.dart';
+import 'package:workoutapp/models/view_pre_weightlifting_screen.dart';
 
 class PresetPlans extends StatefulWidget {
   @override
@@ -35,7 +38,12 @@ class _PresetPlans extends State<PresetPlans> {
                     style: TextStyle(fontSize: 20),
                   ),
                   key: Key('preset-stretches-button'),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => YourPreStretchingPlans()));
+                  },
                 ),
               ),
               SizedBox(
@@ -55,7 +63,12 @@ class _PresetPlans extends State<PresetPlans> {
                     style: TextStyle(fontSize: 20),
                   ),
                   key: Key('preset-aerobics-button'),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => YourPreAerobicsPlans()));
+                  },
                 ),
               ),
               SizedBox(
@@ -75,7 +88,12 @@ class _PresetPlans extends State<PresetPlans> {
                     style: TextStyle(fontSize: 20),
                   ),
                   key: Key('preset-weightlifting-button'),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => YourPreWeightLiftingPlans()));
+                  },
                 ),
               ),
             ])));

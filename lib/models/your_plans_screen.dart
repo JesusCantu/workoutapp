@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:workoutapp/models/add_plan_screen.dart';
-import 'package:workoutapp/models/view_stretch_plan_screen.dart';
-import 'package:workoutapp/models/view_aerobics_plan_screen.dart';
-import 'package:workoutapp/models/view_weightlifting_plan_screen.dart';
+import 'package:workoutapp/models/view_your_stretch_plan_screen.dart';
+import 'package:workoutapp/models/view_your_aerobics_plan_screen.dart';
+import 'package:workoutapp/models/view_your_weightlifting_plan_screen.dart';
 
 class YourPlans extends StatefulWidget {
   @override
@@ -15,7 +15,7 @@ class _YourPlans extends State<YourPlans> {
     return Scaffold(
         backgroundColor: Color.fromRGBO(84, 110, 122, 1),
         appBar: AppBar(
-          title: Text("Your Plans"),
+          title: Text("Your Workouts"),
           key: Key("your-plans-text"),
           centerTitle: true,
           backgroundColor: Color.fromRGBO(30, 50, 56, 1),
@@ -110,7 +110,7 @@ class _YourPlans extends State<YourPlans> {
                   disabledTextColor: Colors.black,
                   textColor: Colors.white,
                   child: Text(
-                    "Add a Plan",
+                    "Add a Workout Plan",
                     style: TextStyle(fontSize: 20),
                   ),
                   key: Key('add-a-plan-button'),
