@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:workoutapp/models/view_pre_stretch_plan_screen.dart';
-import 'package:workoutapp/models/view_pre_aerobics_plan_screen.dart';
-import 'package:workoutapp/models/view_pre_weightlifting_screen.dart';
+import 'package:workoutapp/screens/view_your_plans_screen.dart';
 
-class PresetPlans extends StatefulWidget {
+class YourPlans extends StatefulWidget {
   @override
-  _PresetPlans createState() => _PresetPlans();
+  _YourPlans createState() => _YourPlans();
 }
 
-class _PresetPlans extends State<PresetPlans> {
+class _YourPlans extends State<YourPlans> {
+  String text;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color.fromRGBO(84, 110, 122, 1),
         appBar: AppBar(
-          title: Text("Preset Plans"),
-          key: Key("preset-plan-text"),
+          title: Text("Your Workouts"),
+          key: Key("your-plans-text"),
           centerTitle: true,
           backgroundColor: Color.fromRGBO(30, 50, 56, 1),
           elevation: 0,
@@ -37,12 +36,13 @@ class _PresetPlans extends State<PresetPlans> {
                     "Stretches",
                     style: TextStyle(fontSize: 20),
                   ),
-                  key: Key('preset-stretches-button'),
+                  key: Key('stretches-button'),
                   onPressed: () {
+                    text = "Stretches";
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => YourPreStretchingPlans()));
+                            builder: (context) => ViewYourPlans(text)));
                   },
                 ),
               ),
@@ -62,12 +62,13 @@ class _PresetPlans extends State<PresetPlans> {
                     "Aerobics",
                     style: TextStyle(fontSize: 20),
                   ),
-                  key: Key('preset-aerobics-button'),
+                  key: Key('aerobics-button'),
                   onPressed: () {
+                    text = "Aerobics";
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => YourPreAerobicsPlans()));
+                            builder: (context) => ViewYourPlans(text)));
                   },
                 ),
               ),
@@ -84,17 +85,21 @@ class _PresetPlans extends State<PresetPlans> {
                   disabledTextColor: Colors.black,
                   textColor: Colors.white,
                   child: Text(
-                    "Weight-lifting",
+                    "Weightlifting",
                     style: TextStyle(fontSize: 20),
                   ),
-                  key: Key('preset-weightlifting-button'),
+                  key: Key('weightlifting-button'),
                   onPressed: () {
+                    text = "Weightlifting";
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => YourPreWeightLiftingPlans()));
+                            builder: (context) => ViewYourPlans(text)));
                   },
                 ),
+              ),
+              SizedBox(
+                height: 20,
               ),
             ])));
   }

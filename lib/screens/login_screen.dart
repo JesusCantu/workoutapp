@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:workoutapp/models/sign_in_screen.dart';
-import 'package:workoutapp/models/sign_up_screen.dart';
+import 'package:workoutapp/screens/sign_in_screen.dart';
+import 'package:workoutapp/screens/sign_up_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override

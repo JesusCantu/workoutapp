@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:workoutapp/models/add_plan_screen.dart';
 
-class YourAerobicsPlans extends StatefulWidget {
+class FridayPlan extends StatefulWidget {
+  String text;
+  FridayPlan(this.text);
   @override
-  _YourAerobicsPlans createState() => _YourAerobicsPlans();
+  _FridayPlanState createState() => _FridayPlanState();
 }
 
-class _YourAerobicsPlans extends State<YourAerobicsPlans> {
+class _FridayPlanState extends State<FridayPlan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color.fromRGBO(84, 110, 122, 1),
         appBar: AppBar(
-          title: Text("View Aerobics Plans"),
-          key: Key("your-aerobics-plans-text"),
+          title: Text("Friday ${widget.text} Plan"),
           centerTitle: true,
           backgroundColor: Color.fromRGBO(30, 50, 56, 1),
           elevation: 0,

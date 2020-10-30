@@ -1,26 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:workoutapp/models/home_screen.dart';
-import 'package:workoutapp/models/login_screen.dart';
+import 'package:workoutapp/screens/login_screen.dart';
+import 'package:workoutapp/screens/sign_in_screen.dart';
 import 'package:sqflite/sqflite.dart';
 
-class SignIn extends StatefulWidget {
+class SignUp extends StatefulWidget {
   @override
-  _SignInState createState() => _SignInState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _SignInState extends State<SignIn> {
+class _SignUpState extends State<SignUp> {
+  TextEditingController fn = TextEditingController(); // first name
+  TextEditingController ln = TextEditingController(); // last name
   TextEditingController u = TextEditingController(); // username
   TextEditingController p = TextEditingController(); // password
 
+  String _firstName;
+  String _lastName;
   String _username;
   String _password;
 
   @override
   Widget build(BuildContext context) {
+    bool firstNameEntered = false;
+    bool lastNameEntered = false;
+    bool usernameEntered = false;
+    bool passwordEntered = false;
+
     return Scaffold(
         backgroundColor: Color.fromRGBO(84, 110, 122, 1),
         appBar: AppBar(
-          title: Text("Sign In"),
+          title: Text("Create an Account"),
           centerTitle: true,
           backgroundColor: Color.fromRGBO(30, 50, 56, 1),
           elevation: 0,
@@ -29,6 +38,60 @@ class _SignInState extends State<SignIn> {
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                child: TextFormField(
+                  key: Key("firstname-text"),
+                  initialValue: _firstName,
+                  style: TextStyle(color: Colors.white),
+                  controller: fn,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    fillColor: Color.fromRGBO(41, 67, 78, 1),
+                    filled: true,
+                    hintText: "First Name",
+                    hintStyle: TextStyle(
+                        color: Color.fromRGBO(84, 110, 122, 1), fontSize: 20),
+                  ),
+                  validator: (String value) {
+                    if (value.isEmpty) {
+                      return "First Name is required";
+                    }
+
+                    return null;
+                  },
+                  onSaved: (String value) {
+                    _firstName = value;
+                  },
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                child: TextFormField(
+                  key: Key("lastname-text"),
+                  initialValue: _lastName,
+                  style: TextStyle(color: Colors.white),
+                  controller: ln,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    fillColor: Color.fromRGBO(41, 67, 78, 1),
+                    filled: true,
+                    hintText: "Last Name",
+                    hintStyle: TextStyle(
+                        color: Color.fromRGBO(84, 110, 122, 1), fontSize: 20),
+                  ),
+                  validator: (String value) {
+                    if (value.isEmpty) {
+                      return "Last Name is required";
+                    }
+
+                    return null;
+                  },
+                  onSaved: (String value) {
+                    _lastName = value;
+                  },
+                ),
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                 child: TextFormField(
@@ -85,20 +148,20 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
               RaisedButton(
-                key: Key("sign-in-button-2"),
+                key: Key("sign-up-button-2"),
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(10.0)),
                 color: Color.fromRGBO(30, 50, 56, 1),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(60, 20, 60, 20),
                   child: Text(
-                    "Sign In",
+                    "Sign Up",
                     style: TextStyle(color: Colors.white, fontSize: 14),
                   ),
                 ),
                 onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Home()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SignIn()));
                 },
               ),
             ])));

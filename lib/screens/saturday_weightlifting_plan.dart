@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
-class YourPreStretchingPlans extends StatefulWidget {
+class SaturdayPlan extends StatefulWidget {
+  String text;
+  SaturdayPlan(this.text);
   @override
-  _YourPreStretchingPlans createState() => _YourPreStretchingPlans();
+  _SaturdayPlanState createState() => _SaturdayPlanState();
 }
 
-class _YourPreStretchingPlans extends State<YourPreStretchingPlans> {
+class _SaturdayPlanState extends State<SaturdayPlan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color.fromRGBO(84, 110, 122, 1),
         appBar: AppBar(
-          title: Text("View Stretching Plans"),
+          title: Text("Saturday ${widget.text} Plan"),
           centerTitle: true,
           backgroundColor: Color.fromRGBO(30, 50, 56, 1),
           elevation: 0,

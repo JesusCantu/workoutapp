@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:workoutapp/models/splash_screen.dart';
+import 'package:workoutapp/screens/splash_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,4 +18,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

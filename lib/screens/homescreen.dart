@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:workoutapp/models/your_plans_screen.dart';
+import 'package:workoutapp/screens/your_plans_screen.dart';
 
 class Home extends StatefulWidget {
   @override

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class YourWeightLiftingPlans extends StatefulWidget {
+class YourAerobicsPlans extends StatefulWidget {
   @override
-  _YourWeightLiftingPlans createState() => _YourWeightLiftingPlans();
+  _YourAerobicsPlans createState() => _YourAerobicsPlans();
 }
 
-class _YourWeightLiftingPlans extends State<YourWeightLiftingPlans> {
+class _YourAerobicsPlans extends State<YourAerobicsPlans> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color.fromRGBO(84, 110, 122, 1),
         appBar: AppBar(
-          title: Text("View Weightlifting Plans"),
-          key: Key("your-weightlifting-plans-text"),
+          title: Text("View Aerobics Plans"),
+          key: Key("your-aerobics-plans-text"),
           centerTitle: true,
           backgroundColor: Color.fromRGBO(30, 50, 56, 1),
           elevation: 0,
